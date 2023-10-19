@@ -1,6 +1,7 @@
 package com.cob.demoparkapi.web.controller;
 
 import com.cob.demoparkapi.entity.Usuario;
+import com.cob.demoparkapi.repository.UsuarioRepository;
 import com.cob.demoparkapi.service.UsuarioService;
 import com.cob.demoparkapi.web.dto.UsuarioCreateDto;
 import com.cob.demoparkapi.web.dto.UsuarioResponseDto;
@@ -39,8 +40,8 @@ public class UsuarioController {
     }
 
     @GetMapping
-    public ResponseEntity<List<Usuario>> getAll(){
+    public ResponseEntity<List<UsuarioResponseDto>> getAll(){
         List<Usuario> users = usuarioService.buscarTodos();
-        return ResponseEntity.status(HttpStatus.OK).body(users);
+        return ResponseEntity.status(HttpStatus.OK).body(UsuarioMapper.toListDto(users));
     }
 }
